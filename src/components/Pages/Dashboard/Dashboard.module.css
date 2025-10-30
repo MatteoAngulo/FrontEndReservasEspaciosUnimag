@@ -1,0 +1,73 @@
+/* Dashboard.module.css - adapta tu styles.css a css modules */
+/* :global(body) { */
+  /* si quieres aplicar globalmente, puedes mantener body en index.css; dejamos solo lo necesario aquí */
+/* } */
+
+/* contenedor principal que engloba sidebar + content */
+.mainContainer {
+  display: flex;
+  min-height: calc(100vh - 72px); /* ajusta si tu header tiene otra altura */
+}
+
+/* wrapper para el sidebar (usa el componente Sidebar existente) */
+.sidebarWrapper {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* El componente Sidebar ya tiene su propio module con padding/borde.
+   Si quieres sobrescribir, hazlo aquí: */
+.sidebarWrapper :global(.sidebar) {
+  height: 100%;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+}
+
+/* contenido principal */
+.content {
+  flex: 1;
+  padding: 2rem;
+  background: #f7fafc;
+}
+
+/* header dentro del contenido (título) */
+.contentHeader {
+  margin-bottom: 1.5rem;
+}
+
+.contentTitle {
+  font-size: 2rem;
+  color: #2989d8;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* grid de cards: si FacilityCard usa su propio módulo, aquí solo organizamos el grid */
+.facilitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Si quieres que una tarjeta (p. ej. tennis) ocupe ancho completo,
+   aplica una clase en FacilityCard o envuelve la card en un div con esta clase. */
+.fullWidthCard {
+  grid-column: 1 / -1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .sidebarWrapper {
+    width: 100%;
+  }
+  .content {
+    padding: 1rem;
+  }
+  .facilitiesGrid {
+    grid-template-columns: 1fr;
+  }
+}

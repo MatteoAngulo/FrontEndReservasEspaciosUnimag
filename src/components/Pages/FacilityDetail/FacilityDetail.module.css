@@ -1,0 +1,238 @@
+/* Contenedor principal (espacio detalle) */
+.mainContent {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 2rem;
+}
+
+/* Sidebar (imagen + report) */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.facilityImage {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.placeholder {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  color: #9ca3af;
+}
+
+.reportBtn {
+  width: 100%;
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.restrictions {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.restrictions h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.restrictionsText {
+  margin-top: 0.6rem;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+/* Right column */
+.facilityDetails {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.facilityHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.title {
+  color: #2563eb;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.sedeInfo {
+  margin-left: auto;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.locationIcon {
+  width: 20px;
+  height: 20px;
+  color: #64748b;
+}
+
+/* badges disponibilidad */
+.badgeAvailable {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.badgeUnavailable {
+  background: #ef4444;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.facilitySpecs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.specCard {
+  background: #f8fafc;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #e6eef8;
+}
+
+.specText {
+  color: #374151;
+  margin: 0 0 0.25rem 0;
+}
+
+.smallText {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Schedules */
+.scheduleSection {
+  margin-bottom: 1.25rem;
+}
+
+.timeTabs {
+  display: flex;
+  border-bottom: 2px solid #eef2f7;
+  margin-bottom: 1rem;
+}
+
+.timeTab {
+  flex: 1;
+  padding: 0.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.timeTab:hover { color: #2563eb; }
+.active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+
+.timeSlots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.timeSlot {
+  padding: 0.6rem;
+  border: 2px solid #e6eef8;
+  border-radius: 8px;
+  text-align: center;
+  color: #2563eb;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* available schedules */
+.availableSchedules h3 {
+  color: #2563eb;
+  margin-bottom: 0.75rem;
+}
+
+.scheduleItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #e6eef8;
+  margin-bottom: 0.6rem;
+}
+
+.scheduleInfo {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.scheduleTime { color: #2563eb; font-weight: 700; }
+.scheduleDate { color: #64748b; font-size: 0.9rem; }
+
+.reserveBtn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.center { padding: 2rem; text-align: center; }
+.error { color: #dc2626; margin-bottom: 1rem; }
+
+.backButton {
+  margin-top: 0.75rem;
+}
+@media (max-width: 800px) {
+  .mainContent { grid-template-columns: 1fr; padding: 0 1rem; }
+  .sedeInfo { display: block; margin-left: 0; margin-top: 0.5rem; }
+}

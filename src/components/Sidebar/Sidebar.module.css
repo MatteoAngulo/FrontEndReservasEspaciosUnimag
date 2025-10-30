@@ -1,0 +1,183 @@
+/* Sidebar.module.css — estilo inspirado exactamente en tu dashboard original */
+.sidebar {
+  width: 280px;
+  background: white;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* SEARCH */
+.searchContainer {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 0.75rem 0.6rem 2.5rem; /* deja espacio para icono */
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+/* Si bootstrap añade outline, lo controlamos */
+.searchInput:focus {
+  outline: none;
+  border-color: #2989d8;
+  box-shadow: none;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+}
+
+/* filter button at right of input */
+.filterBtn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.filterBtn:hover {
+  background: rgba(0,0,0,0.03);
+}
+
+/* NAV */
+.navMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.navItem {
+  margin-bottom: 0;
+}
+
+.navLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #666;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.18s ease;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* hover y active states iguales al original */
+.navLink:hover {
+  background: #f0f8ff;
+  color: #2989d8;
+}
+
+.active {
+  background: #e3f2fd;
+  color: #2989d8;
+  font-weight: 600;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+
+/* src/components/Sidebar/Sidebar.module.css
+.sidebar {
+  width: 280px;
+  background: white;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  min-height: calc(100vh - 80px);
+}
+
+.searchContainer {
+  position: relative;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: #666;
+}
+
+.filterBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+.navMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  margin-bottom: 0.6rem;
+}
+
+.navLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #666;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.navLink:hover {
+  background: #f0f8ff;
+  color: #2989d8;
+}
+
+.active {
+  background: #e3f2fd;
+  color: #2989d8;
+  font-weight: 600;
+} */

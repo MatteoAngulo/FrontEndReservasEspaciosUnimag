@@ -1,0 +1,380 @@
+
+:root {
+  --page-bg: #f3f6f7; /* fondo de toda la página (gris muy suave) */
+  --card-bg: #ffffff; /* fondo de la sección de reservas */
+  --card-border: rgba(15, 30, 40, 0.06);
+  --card-shadow: 0 14px 40px rgba(10, 20, 30, 0.06);
+  --primary-blue: #2a87c9;
+  --text-muted: #8f9aa3;
+  --text-dark: #1f2933;
+
+  --approved-bg: #a8d5f7;
+  --approved-text: #0f5fa6;
+
+  --pending-bg: #ffd699;
+  --pending-text: #b45a00;
+
+  --rejected-bg: #ff6b6b;
+  --rejected-text: #ffffff;
+}
+
+:global(body) {
+  background: #f0f3f7 !important;
+}
+
+/* asegurar que la sección completa sea blanca y elevada (último recurso con !important) */
+.reservationsSection {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(0,0,0,0.04) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* la caja que contiene la tabla: fondo blanco, padding y radio — esto crea la "tarjeta blanca" visible */
+.tableContainer {
+  background: #ffffff !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 12px;
+}
+
+/* si la tabla misma tiene fondo transparente, se lo ponemos blanco también */
+.table {
+  background: transparent; /* tabla no necesita fondo, la .tableContainer ya es blanca */
+}
+
+/* container (combina con .container de bootstrap que usas) */
+.container {
+  max-width: 1200px;
+  margin: 1.25rem auto;
+  padding: 0 1rem;
+}
+
+/* título y botones */
+.titleSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ---- SECCIÓN DE RESERVAS: tarjeta blanca que destaca ---- */
+.reservationsSection {
+  background: var(--card-bg); /* blanca para destacar */
+  border-radius: 20px; /* redondeado pronunciado */
+  padding: 1.5rem; /* espacio interior */
+  box-shadow: var(--card-shadow); /* sombra más marcada para elevar */
+  border: 1px solid var(--card-border); /* borde sutil */
+  margin-bottom: 2rem;
+}
+
+/* controles (search + sort) */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  flex: 1;
+  max-width: 520px;
+  background: #fbfdfe;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  width: 100%;
+  background: transparent;
+  color: var(--text-dark);
+}
+
+.sortBox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+}
+
+.sortSelect {
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.95rem;
+  background: #fff;
+  min-width: 160px;
+}
+
+/* tabla */
+.tableContainer {
+  overflow: auto;
+  border-radius: 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  min-width: 760px;
+  background: transparent;
+}
+
+.table thead {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+  background: transparent;
+}
+
+.table th {
+  padding: 0.9rem 0.75rem;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.9rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  color: var(--text-dark);
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background: #fbfcfd;
+}
+
+/* estado: badge base */
+.status {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  min-width: 72px;
+  text-align: center;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.status-aprobado {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  background: var(--approved-bg);
+  color: var(--approved-text);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status-enespera {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  background: var(--pending-bg);
+  color: var(--pending-text);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status-rechazado {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  background: var(--rejected-bg);
+  color: var(--rejected-text);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* opción para personalizar .btn-sm de bootstrap (global) */
+:global(.btn-sm) {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+/* paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  align-items: center;
+}
+
+.paginationBtn,
+.pagination-btn {
+  min-width: 38px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fff;
+  cursor: pointer;
+  padding: 0 0.6rem;
+}
+
+.paginationBtn:hover,
+.pagination-btn:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* clase .active para paginado (usa styles.active en JSX) */
+.active {
+  background: var(--primary-blue) !important;
+  color: #fff !important;
+  border-color: var(--primary-blue) !important;
+}
+
+.pagination-ellipsis {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: default;
+  min-width: 36px;
+}
+
+/* utilidades */
+.text-center {
+  text-align: center;
+}
+.p-4 {
+  padding: 1rem;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .table {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .titleSection {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .searchBox {
+    max-width: 100%;
+  }
+  .table th,
+  .table td {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* --- AÑADIR ESTO AL FINAL DE StudentReservations.module.css --- */
+
+/* Estilos para el Modal de Cancelación */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1040; /* Bootstrap modal z-index es 1050, 1040 para el fondo */
+}
+
+.modalContent {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 550px;
+  z-index: 1050;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.modalCloseBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 0;
+}
+.modalCloseBtn:hover {
+  opacity: 0.8;
+}
+
+.modalBody {
+  padding: 1.25rem;
+  color: #495057;
+}
+
+.modalBody p {
+  margin-bottom: 0.75rem;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #dee2e6;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

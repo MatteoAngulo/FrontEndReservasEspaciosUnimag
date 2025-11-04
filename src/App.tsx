@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./components/Pages/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FacilityDetail from "./components/Pages/FacilityDetail/FacilityDetail";
+import StudentReservations from "./components/Pages/StudentReservations/StudentReservations";
+import EditStudentReservation from "./components/Pages/EditStudentReservation/EditStudentReservation";
 
 function App() {
   return (
@@ -30,46 +32,27 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/mis-reservas"
+          element={
+            <ProtectedRoute>
+              <StudentReservations />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/edit-reservation/:idReserva"
+          element={
+            <ProtectedRoute>
+              <EditStudentReservation />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-
-// import Login from "./components/Pages/Login/Login";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Dashboard from "./components/Pages/Dashboard/Dashboard";
-// import { AuthProvider } from "./components/contexts/AuthContext";
-// import ProtectedRoute from "./components/ProtectedRoute";
-// import FacilityDetail from "./components/Pages/FacilityDetail/FacilityDetail";
-
-// function App() {
-//   return (
-//     <AuthProvider>
-//       <BrowserRouter>
-//         <Routes>
-//           <Route path="/login" element={<Login />} />
-//           <Route
-//             path="/"
-//             element={
-//               <ProtectedRoute>
-//                 <Dashboard />
-//               </ProtectedRoute>
-//             }
-//           />
-//           <Route
-//             path="/cancha/:id"
-//             element={
-//               <ProtectedRoute>
-//                 <FacilityDetail />
-//               </ProtectedRoute>
-//             }
-//           />
-//         </Routes>
-//       </BrowserRouter>
-//     </AuthProvider>
-//   );
-// }
-
-// export default App;

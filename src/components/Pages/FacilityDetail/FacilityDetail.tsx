@@ -8,12 +8,6 @@ import { useAuth } from "../../contexts/AuthContext";
 
 /**
  * DTO que devuelve el backend (EspacioDTOResponse)
- * Long id,
- * String nombre,
- * String tipo,
- * String restricciones,
- * Long idSede,
- * Boolean disponible
  */
 type EspacioDetail = {
   id: number;
@@ -46,6 +40,16 @@ type ReservaEstDtoResponse = {
   motivo: string;
 };
 
+type ReservaCheckResponse = {
+  idReserva: number;
+  idEstudiante: number;
+  idHorarioEspacio: number;
+  estadoReserva: "PENDIENTE" | "APROBADO" | "RECHAZADO" | "CANCELADA";
+  fecha: string;
+  motivo?: string | null;
+};
+// --------------------
+
 // helper: comprobar que la fecha ISO (YYYY-MM-DD) sea estrictamente FUTURA (no hoy)
 function isStrictlyFuture(isoDate?: string) {
   if (!isoDate) return false;
@@ -55,8 +59,6 @@ function isStrictlyFuture(isoDate?: string) {
   return isoDate > todayStr; // string compare works for ISO dates
 }
 
-// Opcional: si quieres evitar que el usuario pueda seleccionar hoy en el <input type="date">,
-// usa minSelectableDate = tomorrow; sustituye tu minDate actual por esta variable en el input.
 const minSelectableDate = (() => {
   const now = new Date();
   now.setDate(now.getDate() + 1); // tomorrow
@@ -197,17 +199,38 @@ export default function FacilityDetail(): JSX.Element {
         const checks = await Promise.all(
           horariosDelDia.map(async (h) => {
             try {
-              const r = await api.get("/admin/reservas/por-horario-y-fecha", {
-                params: {
-                  fecha: fechaReserva,
-                  idHorarioEspacio: h.idHorarioEspacio,
-                },
-              });
-              // si r.status 200 y r.data existe => reservado
-              const reservado = !!r.data; // si viene objeto -> reservado
-              return { horario: h, reservado };
+              // --- ¡INICIO DE LA MODIFICACIÓN! ---
+              // Especificamos el tipo de respuesta esperado
+              const r = await api.get<ReservaCheckResponse>(
+                "/admin/reservas/por-horario-y-fecha",
+                {
+                  params: {
+                    fecha: fechaReserva,
+                    idHorarioEspacio: h.idHorarioEspacio,
+                  },
+                }
+              );
+              
+              // si r.status 200 y r.data existe => hay una reserva.
+              const reserva = r.data;
+              
+              if (!reserva) {
+                // No hay reserva (o r.data es null/undefined)
+                return { horario: h, reservado: false };
+              }
+
+              // ¡NUEVA LÓGICA!
+              // El slot ESTÁ RESERVADO (ocupado) si el estado es PENDIENTE o APROBADO.
+              // Si está CANCELADA o RECHAZADO, el slot está DISPONIBLE.
+              const estado = String(reserva.estadoReserva).toUpperCase();
+              const estaReservado =
+                estado === "PENDIENTE" || estado === "APROBADO";
+
+              return { horario: h, reservado: estaReservado };
+              // --- FIN DE LA MODIFICACIÓN! ---
+
             } catch (err: any) {
-              // si backend responde 404 o 204 -> no reservado
+              // si backend responde 404 o 204 -> no hay reserva -> no reservado
               const status = err?.response?.status;
               if (status === 404 || status === 204) {
                 return { horario: h, reservado: false };
@@ -499,7 +522,7 @@ export default function FacilityDetail(): JSX.Element {
                   // si por alguna razón el usuario escribe manualmente una fecha < minSelectableDate, la rechazamos
                   if (v && v < minSelectableDate) {
                     // opcional: mostrar mensaje corto o simplemente forzar al minSelectableDate
-                    alert("No puedes seleccionar una fecha anterior a hoy.");
+                    alert("No puedes seleccionar una fecha anterior a mañana.");
                     setFechaReserva(minSelectableDate);
                   } else {
                     setFechaReserva(v);

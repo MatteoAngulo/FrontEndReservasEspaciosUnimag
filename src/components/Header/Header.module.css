@@ -17,7 +17,7 @@
   z-index: 40;
 }
 
-.header h1 {
+.logo {
   font-size: 1.25rem;
   font-weight: 600;
   text-transform: capitalize;
@@ -53,9 +53,46 @@
   align-items: center;
   justify-content: center;
   transition: all 0.18s ease;
+  padding: 0;
 }
 
 .iconBtn:hover {
   background: rgba(255, 165, 0, 1);
   transform: translateY(-2px);
+}
+
+.profileMenu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  top: 48px;
+  width: 220px;
+  list-style: none;
+  padding: 8px;
+  background: white;
+  color: #111;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(4, 9, 20, 0.15);
+  z-index: 60;
+}
+
+.profileMenu li {
+  padding: 0;
+}
+
+.profileMenu button {
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  color: #111;
+}
+
+.profileMenu button:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.profileMenu hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 6px 0;
 }
